@@ -4,7 +4,7 @@ import { Background } from "./Backgorund";
 import { Hero } from "./Hero";
 import { Platforms } from "./Platforms";
 
-export class GameScene extends Scene {
+export class Game extends Scene {
     create() {
         this.createBackground();
         this.createHero();

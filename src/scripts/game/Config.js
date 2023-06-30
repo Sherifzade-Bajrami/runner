@@ -1,4 +1,4 @@
-import { Game, GameScene } from "./GameScene";
+import { Game, GameScene } from "./Game";
 import { Tools } from "../system/Tools";
 
 export const Config = {
@@ -31,6 +31,6 @@ export const Config = {
     },  
     loader: Tools.massiveRequire(require["context"]('./../../sprites/', true, /\.(mp3|png|jpe?g)$/)),
     scenes: {
-        "GameSceme": GameScene
+        "Game": Game
     }
 };
