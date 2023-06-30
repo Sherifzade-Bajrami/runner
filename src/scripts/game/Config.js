@@ -1,9 +1,10 @@
-import { Game } from "./Game";
+import { Game, GameScene } from "./GameScene";
 import { Tools } from "../system/Tools";
 
 export const Config = {
     bgSpeed: 2,
     platforms: {
+        moveSpeed: -1.5,
         ranges: {
             rows: {
                 min: 2,
@@ -21,13 +22,15 @@ export const Config = {
     },
 
     hero: {
+        jumpSpeed: 15,
+        maxJumps: 2,
         position: {
             x: 350,
-            y: 425
+            y: 400
         }
     },  
     loader: Tools.massiveRequire(require["context"]('./../../sprites/', true, /\.(mp3|png|jpe?g)$/)),
     scenes: {
-        "Game": Game
+        "GameSceme": GameScene
     }
 };

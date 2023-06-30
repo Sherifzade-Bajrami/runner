@@ -1,4 +1,5 @@
 import * as PIXI from "pixi.js";
+import * as Matter from "matter-js";
 import { App } from '../system/App';
 
 
@@ -11,6 +12,23 @@ export class Platform {
         this.height = this.tileSize * this.rows;
         this.createContainer(x);
         this.createTiles();
+
+        this.dx = App.config.platforms.moveSpeed;
+        this.createBody();
+    }
+
+    move(){
+        if(this.body){
+            Matter.Body.setPosition(this.body, {x: this.body.position.x + this.dx, y: this.body.position.y});
+            this.container.x = this.body.position.x - this.width / 2;
+            this.container.y = this.body.position.y - this.height / 2;
+        }
+    }
+
+    createBody(){
+    this.body = Matter.Bodies.rectangle(this.width / 2 + this.container.x, this.height / 2 + this.container.y, this.width, this.height, {friction: 0, isStatic: true});
+    Matter.World.add(App.physics.world, this.body);
+    this.body.gamePlatform = this;
     }
    
     createContainer(x) {

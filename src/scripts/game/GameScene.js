@@ -4,7 +4,7 @@ import { Background } from "./Backgorund";
 import { Hero } from "./Hero";
 import { Platforms } from "./Platforms";
 
-export class Game extends Scene {
+export class GameScene extends Scene {
     create() {
         this.createBackground();
         this.createHero();
@@ -18,6 +18,10 @@ export class Game extends Scene {
     createHero() {
         this.hero = new Hero();
         this.container.addChild(this.hero.sprite);
+        this.container.interactive = true;
+        this.container.on("pointerdown", () => {
+            this.hero.startJump();
+        });
     }
     createBackground() {
         this.bg = new Background();
