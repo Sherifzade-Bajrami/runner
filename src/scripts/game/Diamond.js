@@ -14,7 +14,7 @@ export class Diamond {
     }
     update(){
         if(this.sprite){
-            Matter.Body.setPosition(this.body, {x: this.sprite.width / 2 + this.sprite.x + this.sprite})
+            Matter.Body.setPosition(this.body, {x: this.sprite.width / 2 + this.sprite.x + this.sprite});
         }
     }
 
@@ -23,5 +23,14 @@ export class Diamond {
         this.body.gameDiamond = this;
         this.body.isSensor = true;
         Matter.World.add(App.physics.world, this.body);
+    }
+
+    destroy() {
+        if (this.sprite) {
+            App.app.ticker.remove(this.update, this);
+            Matter.World.remove(App.physics.world, this.body);
+            this.sprite.destroy();
+            this.sprite = null;
+        }
     }
 }

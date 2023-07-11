@@ -4,6 +4,7 @@ import { Scene } from "../system/Scene";
 import { Background } from "./Backgorund";
 import { Hero } from "./Hero";
 import { Platforms } from "./Platforms";
+import { LabelScore } from "./LabelScore";
 
 export class Game extends Scene {
     create() {
@@ -11,6 +12,15 @@ export class Game extends Scene {
         this.createHero();
         this.createPlatforms();
         this.setEvents();
+        this.createUI();
+    }
+
+    createUI() {
+        this.labelScore = new LabelScore();
+        this.container.addChild(this.labelScore);
+        this.hero.sprite.on("score", () => {
+            this.labelScore.renderScore(this.hero.score);
+        });
     }
 
     setEvents(){
@@ -36,6 +46,7 @@ export class Game extends Scene {
         this.platfroms = new Platforms();
         this.container.addChild(this.platfroms.container);
     }
+
     createHero() {
         this.hero = new Hero();
         this.container.addChild(this.hero.sprite);
@@ -43,11 +54,25 @@ export class Game extends Scene {
         this.container.on("pointerdown", () => {
             this.hero.startJump();
         });
+        this.hero.sprite.once("die", () => {
+            App.scenes.start("Game");
+        });
     }
+
+    destroy() {
+        Matter.Events.off(App.physics, 'collisionStart', this.onCollisionStart.bind(this));
+        App.app.ticker.remove(this.update, this);
+        this.bg.destroy();
+        this.hero.destroy();
+        this.platfroms.destroy();
+        this.labelScore.destroy();
+    }
+
     createBackground() {
         this.bg = new Background();
         this.container.addChild(this.bg.container);
     }
+
     update(dt) {
         this.bg.update(dt);
         this.platfroms.update(dt);    

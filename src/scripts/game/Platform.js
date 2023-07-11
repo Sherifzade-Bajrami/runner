@@ -51,6 +51,12 @@ export class Platform {
     Matter.World.add(App.physics.world, this.body);
     this.body.gamePlatform = this;
     }
+
+    destroy() {
+        Matter.World.remove(App.physics.world, this.body);
+        this.diamonds.forEach(diamond => diamond.destroy());
+        this.container.destroy();
+    }
    
     createContainer(x) {
         this.container = new PIXI.Container();
