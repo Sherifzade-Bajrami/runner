@@ -12,9 +12,9 @@ export class Diamond {
         this.sprite.x = x;
         this.sprite.y = y;
     }
-    update(){
-        if(this.sprite){
-            Matter.Body.setPosition(this.body, {x: this.sprite.width / 2 + this.sprite.x + this.sprite});
+    update() {
+        if (this.sprite) {
+            Matter.Body.setPosition(this.body, {x: this.sprite.width / 2 + this.sprite.x + this.sprite.parent.x, y: this.sprite.height / 2 + this.sprite.y + this.sprite.parent.y});
         }
     }
 
