@@ -22,14 +22,14 @@ export const Config = {
         }
     },
     platforms: {
-        moveSpeed: -1.5,
+        moveSpeed: -1.0,
         ranges: {
             rows: {
                 min: 2,
-                max: 6
+                max: 4
             },
             cols: {
-                min: 3,
+                min: 5,
                 max: 9
             },
             offset: {
@@ -43,7 +43,7 @@ export const Config = {
         jumpSpeed: 15,
         maxJumps: 2,
         position: {
-            x: 350,
+            x: 400,
             y: 400
         }
     },  
@@ -51,4 +51,6 @@ export const Config = {
     scenes: {
         "Game": Game
     }
+
+    
 };
